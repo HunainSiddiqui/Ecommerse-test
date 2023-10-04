@@ -12,18 +12,26 @@ import {
   minLengthMobileNo,
   digit,
   name,
+  email,
 } from "../../helpers/validation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faTwitter,
   faFacebookF,
   faGoogle,
 } from "@fortawesome/free-brands-svg-icons";
 import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
+import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 import { ReactComponent as IconShieldLock } from "bootstrap-icons/icons/shield-lock.svg";
+import axios from "axios";
 
 const SignUpForm = (props) => {
   const { handleSubmit, submitting, onSubmit, submitFailed } = props;
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -55,16 +63,14 @@ const SignUpForm = (props) => {
         </div>
       </div>
       <Field
-        name="mobileNo"
-        type="number"
-        label="Mobile no"
+        name="email"
+        type="email" // Change type to "email"
+        label="Email"
         component={renderFormGroupField}
-        placeholder="Mobile no without country code"
-        icon={IconPhone}
-        validate={[required, maxLengthMobileNo, minLengthMobileNo, digit]}
+        placeholder="Enter Your Email Id"
+        icon={IconEnvelope} // You can change the icon to an email icon
+        validate={[required, email]} // Use email validation
         required={true}
-        max="999999999999999"
-        min="9999"
         className="mb-3"
       />
       <Field
