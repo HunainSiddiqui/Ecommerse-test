@@ -3,11 +3,13 @@ import { Field, reduxForm } from "redux-form";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
 import renderFormGroupField from "../../helpers/renderFormGroupField";
+import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
 import {
   required,
   maxLengthMobileNo,
   minLengthMobileNo,
   digit,
+  email
 } from "../../helpers/validation";
 import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
 
@@ -19,17 +21,15 @@ const ForgotPasswordForm = (props) => {
       className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
       noValidate
     >
-      <Field
-        name="mobileNo"
-        type="number"
-        label="Mobile no"
+       <Field
+        name="email"
+        type="email" // Change type to "email"
+        label="Email"
         component={renderFormGroupField}
-        placeholder="Mobile no without country code"
-        icon={IconPhone}
-        validate={[required, maxLengthMobileNo, minLengthMobileNo, digit]}
+        placeholder="Enter Your Email Id"
+        icon={IconEnvelope} // You can change the icon to an email icon
+        validate={[required, email]} // Use email validation
         required={true}
-        max="999999999999999"
-        min="9999"
         className="mb-3"
       />
       <div className="d-grid">

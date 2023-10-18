@@ -1,4 +1,5 @@
 import React, { lazy, Component } from "react";
+import axios from "axios";
 const ProfileForm = lazy(() => import("../../components/account/ProfileForm"));
 const ChangePasswordForm = lazy(() =>
   import("../../components/account/ChangePasswordForm")
@@ -10,13 +11,30 @@ const CardListForm = lazy(() =>
 
 class MyProfileView extends Component {
   state = { imagePreview: "", isDeleting: false };
+  
 
   onSubmitProfile = async (values) => {
     alert(JSON.stringify(values));
   };
 
   onSubmitChangePassword = async (values) => {
-    alert(JSON.stringify(values));
+    axios.put("https://ecommersebackend1.onrender.com/api/v1/password/update", {
+      oldPassword:values.currentPassword,
+      newPassword: values.password,
+      confirmPassword: values.confirmPassword
+    },
+    {
+      withCredentials: true,
+      crossDomain: true,
+    })
+      .then((response) => {
+        // Handle the response if needed
+       
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+   
   };
 
   onImageChange = async (obj) => {

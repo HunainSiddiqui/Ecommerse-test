@@ -7,18 +7,22 @@ import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const CardProductList = (props) => {
   const product = props.data;
+ 
   return (
     <div className="card">
       <div className="row g-0">
         <div className="col-md-3 text-center">
-          <img src={product.img} className="img-fluid" alt="..." />
+
+          <img src={product.images[0].url} className="img-fluid" alt="..." />
         </div>
         <div className="col-md-6">
           <div className="card-body">
             <h6 className="card-subtitle me-2 d-inline">
-              <Link to={product.link} className="text-decoration-none">
+              <Link to={"/product/detail"} className="text-decoration-none">
+          
                 {product.name}
               </Link>
+              
             </h6>
             {product.isNew && (
               <span className="badge bg-success me-2">New</span>

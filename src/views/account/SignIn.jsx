@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 
 const SignInForm = lazy(() => import("../../components/account/SignInForm"));
@@ -18,14 +19,21 @@ function SignInView() {
     try {
       const res = await axios.post(
         "https://ecommersebackend1.onrender.com/api/v1/login",
-        formdata
+        formdata, {
+          withCredentials: true,
+          crossDomain: true,
+        }
       );
+      const token = res.data.token;
+    
       if (res.status === 200) {
         navigate("/");
+
       }
     } catch (error) {
       console.log(error);
     }
+    
   };
   return (
     <div className="container my-3">

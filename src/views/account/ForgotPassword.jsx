@@ -1,11 +1,30 @@
 import React, { lazy, Component } from "react";
+import axios from "axios";
 const ForgotPasswordForm = lazy(() =>
   import("../../components/account/ForgotPasswordForm")
 );
 
+
 class ForgotPasswordView extends Component {
   onSubmit = async (values) => {
-    alert(JSON.stringify(values));
+
+
+    axios.post("https://ecommersebackend1.onrender.com/api/v1/forgetPassword", {
+      email: values.email,
+    },
+    {
+      withCredentials: true,
+      crossDomain: true,
+    })
+      .then((response) => {
+        // Handle the response if needed
+
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+   
   };
   render() {
     return (

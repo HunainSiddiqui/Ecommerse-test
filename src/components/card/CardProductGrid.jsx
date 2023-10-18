@@ -8,7 +8,7 @@ const CardProductGrid = (props) => {
   const product = props.data;
   return (
     <div className="card">
-      <img src={product.img} className="card-img-top" alt="..." />
+      <img src={product.images[0].url} className="card-img-top" alt="..." />
       {product.isNew && (
         <span className="badge bg-success position-absolute mt-2 ms-2">
           New
@@ -26,16 +26,17 @@ const CardProductGrid = (props) => {
           }`}
         >
           -
-          {product.discountPercentage > 0
+          {product.discountPercentage > 0 
+          
             ? product.discountPercentage + "%"
             : "$" + product.discountPrice}
         </span>
       )}
       <div className="card-body">
         <h6 className="card-subtitle mb-2">
-          <Link to={product.link} className="text-decoration-none">
+          {/* <Link to={product.link} className="text-decoration-none"> */}
             {product.name}
-          </Link>
+          {/* </Link> */}
         </h6>
         <div className="my-2">
           <span className="fw-bold h5">${product.price}</span>

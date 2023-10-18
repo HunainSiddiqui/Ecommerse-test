@@ -1,6 +1,35 @@
 import React from "react";
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box'
+const marks = [
+  {
+    value: 0,
+    label: '0$',
+  },
+  {
+    value: 500,
+    label: '500$',
+  },
+  
+  {
+    value: 1000,
+    label: '1000$',
+  },
+];
+
+function valuetext(value) {
+  return `${value + "$"}°$`;
+}
+
 
 const FilterPrice = (props) => {
+  const [value, setValue] = React.useState([0, 1000]);
+
+  const handleChange = (event, newValue) => {
+    
+    setValue(newValue);
+    props.onValueChange(newValue);
+  };
   return (
     <div className="card mb-3">
       <div
@@ -12,44 +41,23 @@ const FilterPrice = (props) => {
       >
         Price
       </div>
-      <ul className="list-group list-group-flush show" id="filterPrice">
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault1"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault1">
-              $24.00 - $29.00 <span className="text-muted">(4)</span>
-            </label>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault2"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault2">
-              $33.00 - $35.00 <span className="text-muted">(2)</span>
-            </label>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault3"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault3">
-              $70.00 - $99.00 <span className="text-muted">(5)</span>
-            </label>
-          </div>
-        </li>
-      </ul>
+    
+       
+  
+        <Box component="span" sx={{ p:2, width: 150 }}>
+      <Slider
+        getAriaLabel={() => 'Temperature range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        marks={marks}
+        min={0}
+        max={1000}></Slider>
+    </Box>
+       
+       
+      
     </div>
   );
 };
