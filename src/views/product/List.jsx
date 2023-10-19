@@ -55,7 +55,7 @@ function ProductListView() {
 
   useEffect(() => {
     let link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
-    if (selectedCategory == "") {
+    if (selectedCategory === "") {
       link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}` ;
       
     }
