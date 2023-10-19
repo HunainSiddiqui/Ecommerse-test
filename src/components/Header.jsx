@@ -11,8 +11,25 @@ import { ReactComponent as IconBellFill } from "bootstrap-icons/icons/bell-fill.
 import { ReactComponent as IconInfoCircleFill } from "bootstrap-icons/icons/info-circle-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const Header = () => {
+ const handlelogout = (async() => {
+
+
+  try {
+    const res  = await axios.get("https://ecommersebackend1.onrender.com/api/v1/logout") ;
+  } catch (error) {
+    console.log(error);
+    
+  }
+ 
+  
+
+
+ })
+
+
   return (
     <React.Fragment>
       <header className="p-3 border-bottom bg-light">
@@ -88,23 +105,14 @@ const Header = () => {
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/">
-                      <IconDoorClosedFill className="text-danger" /> Logout
+                      <IconDoorClosedFill className="text-danger" onClick={handlelogout} /> Logout
                     </Link>
                   </li>
                 </ul>
               </div>
-              <a
-                href="https://www.buymeacoffee.com/bhaumik"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                  alt="BuyMeACoffee" width="120"
-                />
-              </a>
-              {/* <Link to="/account/signin">Sign In</Link> |{" "}
-              <Link to="/account/signup"> Sign Up</Link> */}
+             
+              <Link to="/account/signin">Sign In</Link> |{" "}
+              <Link to="/account/signup"> Sign Up</Link>
             </div>
           </div>
         </div>

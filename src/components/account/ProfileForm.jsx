@@ -48,10 +48,10 @@ const ProfileForm = (props) => {
 
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     handle() ;
-    
-  }, []);
+     
+  },[] );
 
   const handleEditClick = () => {
     setIsEditing(true);

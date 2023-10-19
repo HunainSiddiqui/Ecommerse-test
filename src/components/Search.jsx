@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ReactComponent as IconSearch } from "bootstrap-icons/icons/search.svg";
 
 const Search = () => {
+  
   return (
     <form action="#" className="search">
       <div className="input-group">
@@ -19,7 +21,9 @@ const Search = () => {
           type="submit"
           aria-label="Search"
         >
-          <IconSearch />
+          <Link  to="/category">
+              <IconSearch />
+          </Link>
         </button>
       </div>
     </form>
