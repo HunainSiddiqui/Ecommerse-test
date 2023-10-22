@@ -1,5 +1,7 @@
-import React, { useState, lazy } from "react";
+import React, { useState, lazy, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartPlus,
@@ -28,24 +30,45 @@ const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 
 function ProductDetailView() {
   const [count, setCount] = useState(0);
+  const [productdata,setproductdata] = useState(null) ;
   function decreaseHandler() {
     setCount(count- 1);
   }
   function increaseHandler() {
     setCount(count + 1);
   }
+  const { id } = useParams();
+
+  const fetchData =(async() => {
+    try {
+      
+      
+      const response = await axios.get(`https://ecommersebackend1.onrender.com/api/v1/product/${id}`);
+      
+      setproductdata(response.data.product)
+    } catch (error) {
+      console.error(error);
+    }
+
+  })
+  useEffect(()=>{
+    fetchData() ;
+
+    
+  },[id])
   return (
     <div className="container-fluid mt-3">
       <div className="row">
         <div className="col-md-8">
           <div className="row mb-3">
-            <div className="col-md-5 text-center">
-              <img
-                src="../../images/products/tshirt_red_480x400.webp"
-                className="img-fluid mb-3"
-                alt=""
-              />
-              <img
+            {productdata ? (<>
+                <div className="col-md-5 text-center">
+                <img
+                  src={productdata.images[0].url}
+                  className="img-fluid mb-3"
+                  alt="."
+                />
+                <img
                 src="../../images/products/tshirt_grey_480x400.webp"
                 className="border border-secondary me-2"
                 width="75"
@@ -65,7 +88,7 @@ function ProductDetailView() {
               />
             </div>
             <div className="col-md-7">
-              <h1 className="h5 d-inline me-2">Great name goes here</h1>
+              <h1 className="h5 d-inline me-2">{productdata.name}</h1>
               <span className="badge bg-success me-2">New</span>
               <span className="badge bg-danger me-2">Hot</span>
               <div className="mb-3">
@@ -155,7 +178,7 @@ function ProductDetailView() {
               </dl>
 
               <div className="mb-3">
-                <span className="fw-bold h5 me-2">$1900</span>
+                <span className="fw-bold h5 me-2"> $ {productdata.price} </span>
                 <del className="small text-muted me-2">$2000</del>
                 <span className="rounded p-1 bg-warning  me-2 small">
                   -$100
@@ -213,13 +236,21 @@ function ProductDetailView() {
                 <p className="fw-bold mb-2 small">Product Highlights</p>
                 <ul className="small">
                   <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    {productdata.description}
                   </li>
                   <li>Etiam ullamcorper nibh eget faucibus dictum.</li>
                   <li>Cras consequat felis ut vulputate porttitor.</li>
                 </ul>
               </div>
             </div>
+             
+              </>
+              ) : (
+                <p>Loading...</p>
+              )}
+              
+              
+           
           </div>
           <div className="row">
             <div className="col-md-12">

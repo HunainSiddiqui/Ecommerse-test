@@ -33,9 +33,7 @@ function ProductListView() {
     "Coats & Jackets",
   ];
 
-
   const [selectedCategory, setSelectedCategory] = useState("");
-  
 
   const handleCategoryChange = (category) => {
     console.log(selectedCategory);
@@ -46,20 +44,44 @@ function ProductListView() {
 
   const handlePriceValueChange = (newValue) => {
     setPriceValue(newValue);
-    
   };
   const handeleRatingchange = (newValue) => {
     setrating(newValue);
-    
   };
 
   useEffect(() => {
-    let link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+    const searchedText = localStorage.getItem("searched");
+    let link ;
     if (selectedCategory === "") {
-      link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}` ;
-      
+     
+      if (searchedText) {
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+        console.log("Searched text:", searchedText);
+        localStorage.removeItem("searched");
+      } else {
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+
+        
+      }
     }
+    else{
+      if (searchedText) {
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+        console.log("Searched text:", searchedText);
+      } else {
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+
+        
+      }
+
+
+    
+    }
+
    
+    
+   
+
     axios
       .get(link, {
         withCredentials: true,
@@ -68,24 +90,20 @@ function ProductListView() {
       .then((response) => {
         const products = response.data.products;
         setCurrentProducts(products);
-        settotalItems(response.data.productCount) ;
+        settotalItems(response.data.productCount);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [currentPage,selectedCategory,priceValue,rating]);
+  }, [currentPage, selectedCategory, priceValue, rating]);
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
 
- 
-
   const onChangeView = (view) => {
     setView(view);
   };
-
-  
 
   return (
     <React.Fragment>
@@ -100,14 +118,14 @@ function ProductListView() {
       <div className="container-fluid mb-3">
         <div className="row">
           <div className="col-md-3">
-            <FilterCategory 
-             categories={categories}
-             selectedCategory={selectedCategory}
-             onCategoryChange={handleCategoryChange}
+            <FilterCategory
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
             />
             <RangeSlider onValueChange={handlePriceValueChange} />
-        
-            <FilterStar onratingChange={handeleRatingchange}/>
+
+            <FilterStar onratingChange={handeleRatingchange} />
             {/* <FilterColor /> */}
             {/* <FilterClear /> */}
             {/* <FilterTag /> */}
@@ -172,7 +190,7 @@ function ProductListView() {
                 ))}
             </div>
             <hr />
-          
+
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
@@ -189,7 +207,6 @@ function ProductListView() {
                 activeLinkClass="pageLinkActive"
               />
             </div>
-        
           </div>
         </div>
       </div>
