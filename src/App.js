@@ -6,6 +6,7 @@ import TopMenu from "./components/TopMenu";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.min.css";
+import { CartProvider } from "./contex/Cartcontex";
 //const Header = lazy(() => import("./components/Header"));
 //const TopMenu = lazy(() => import("./components/TopMenu"));
 const HomeView = lazy(() => import("./views/Home"));
@@ -34,6 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <React.Fragment>
+        <CartProvider>
         <Header />
         <TopMenu />
         <Suspense
@@ -74,6 +76,7 @@ function App() {
           </Routes>
         </Suspense>
         <Footer />
+        </CartProvider>
       </React.Fragment>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import React, { useState, lazy, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import { useCart } from '../../contex/Cartcontex';
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,6 +39,12 @@ function ProductDetailView() {
     setCount(count + 1);
   }
   const { id } = useParams();
+  const { state, dispatch } = useCart();
+
+  const addToCart = () => {
+    dispatch({ type: 'ADD_TO_CART', payload: productdata });
+    console.log("Item added to cart");
+  };
 
   const fetchData =(async() => {
     try {
@@ -214,6 +221,7 @@ function ProductDetailView() {
                   type="button"
                   className="btn btn-sm btn-primary me-2"
                   title="Add to cart"
+                  onClick={addToCart}
                 >
                   <FontAwesomeIcon icon={faCartPlus} /> Add to cart
                 </button>
