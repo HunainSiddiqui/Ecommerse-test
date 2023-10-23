@@ -7,6 +7,10 @@ import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const CardProductList = (props) => {
   const product = props.data;
+  const  id = product._id ;
+  
+  
+
  
   return (
     <div className="card">
@@ -18,7 +22,7 @@ const CardProductList = (props) => {
         <div className="col-md-6">
           <div className="card-body">
             <h6 className="card-subtitle me-2 d-inline">
-              <Link to={"/product/detail"} className="text-decoration-none">
+              <Link to={`/product/detail/${id}`} className="text-decoration-none">
           
                 {product.name}
               </Link>
