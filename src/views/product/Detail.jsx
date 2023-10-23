@@ -30,14 +30,15 @@ const ShippingReturns = lazy(() =>
 const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 
 function ProductDetailView() {
-  const [count, setCount] = useState(0);
+ 
   const [productdata,setproductdata] = useState(null) ;
-  function decreaseHandler() {
-    setCount(count- 1);
-  }
-  function increaseHandler() {
-    setCount(count + 1);
-  }
+  const [count, setCount] = useState(0);
+   function decreaseHandler() {
+     setCount(count === 1 ? (count = 1) : count - 1);
+   }
+   function increaseHandler() {
+     setCount(count + 1);
+   }
   const { id } = useParams();
   const { state, dispatch } = useCart();
 
