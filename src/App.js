@@ -6,6 +6,7 @@ import TopMenu from "./components/TopMenu";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.min.css";
+import Groceries from "./views/product/Groceries";
 //const Header = lazy(() => import("./components/Header"));
 //const TopMenu = lazy(() => import("./components/TopMenu"));
 const HomeView = lazy(() => import("./views/Home"));
@@ -59,6 +60,8 @@ function App() {
               element={<NotificationView/>}
             />
             <Route exact path="/category" element={<ProductListView/>} />
+            <Route exact path="/groceries" element={<Groceries/>} />
+
             <Route exact path="/product/detail" element={<ProductDetailView/>} />
             <Route exact path="/star/zone" element={<StarZoneView/>} />
             <Route exact path="/cart" element={<CartView/>} />
