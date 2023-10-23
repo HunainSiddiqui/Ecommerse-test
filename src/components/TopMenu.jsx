@@ -71,7 +71,7 @@ const TopMenu = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/groceries">
-                Supermarket
+                Groceries
               </Link>
               
               
