@@ -17,7 +17,7 @@ import CardProductList from "../../components/card/CardProductList";
 import axios from "axios";
 import { data } from "../../data";
 
-function Groceries() {
+function Garden() {
   const [currentProducts, setCurrentProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, settotalItems] = useState(0);
@@ -25,14 +25,17 @@ function Groceries() {
   const [maxvalue, setmaxvalue] = useState(0);
   const [view, setView] = useState("list");
   const categories = [
-    "Fresh Produce",
-    "Meat & Seafood",
-    "Dairy & Eggs",
-    "Bakery & Bread",
-    "Frozen Foods",
-    "Beverages",
-    "Household Goods",
-    "Pantry Staples",
+    "Gardening Tools & Supplies",
+
+    "Plants & Flowers",
+    "Outdoor Furniture",
+    "Outdoor Décor",
+    "Grills & Smokers",
+    "Patio Heaters & Lighting",
+    "Pools & Spas",
+    "Sporting Goods",
+    "Camping & Hiking Gear",
+  
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -57,10 +60,10 @@ function Groceries() {
     if (selectedCategory === "") {
       if (searchedText) {
         link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
-    console.log("Searched text:", searchedText);
-    localStorage.removeItem("searched");
-} else {
-    link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+        console.log("Searched text:", searchedText);
+        localStorage.removeItem("searched");
+      } else {
+        link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
       }
     } else {
       if (searchedText) {
@@ -98,7 +101,7 @@ function Groceries() {
       <div className="p-5 bg-primary bs-cover">
         <div className="container text-center">
           <span className="display-5 px-3 bg-white rounded shadow">
-            Groceries🛍️🛒
+            Gardening👩🏻‍🌾
           </span>
         </div>
       </div>
@@ -202,4 +205,4 @@ function Groceries() {
   );
 }
 
-export default Groceries;
+export default Garden;

@@ -17,7 +17,7 @@ import CardProductList from "../../components/card/CardProductList";
 import axios from "axios";
 import { data } from "../../data";
 
-function Groceries() {
+function Electronics() {
   const [currentProducts, setCurrentProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, settotalItems] = useState(0);
@@ -25,14 +25,14 @@ function Groceries() {
   const [maxvalue, setmaxvalue] = useState(0);
   const [view, setView] = useState("list");
   const categories = [
-    "Fresh Produce",
-    "Meat & Seafood",
-    "Dairy & Eggs",
-    "Bakery & Bread",
-    "Frozen Foods",
-    "Beverages",
-    "Household Goods",
-    "Pantry Staples",
+   "Computers & Laptops",
+    "Smartphones & Tablets",
+    "TVs & Home Theater",
+    "Audio & Headphones",
+    "Cameras & Video",
+    "Gaming",
+    "Wearables & Smart Home",
+    "Networking & Accessories",
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -56,17 +56,18 @@ function Groceries() {
     let link;
     if (selectedCategory === "") {
       if (searchedText) {
-        link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
-    console.log("Searched text:", searchedText);
-    localStorage.removeItem("searched");
-} else {
-    link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+        console.log("Searched text:", searchedText);
+        localStorage.removeItem("searched");
+      } else {
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
       }
     } else {
       if (searchedText) {
-        link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+        console.log("Searched text:", searchedText);
       } else {
-        link = `https://groceriesbackend.onrender.com/api/v1/items?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
+        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
       }
     }
 
@@ -98,7 +99,7 @@ function Groceries() {
       <div className="p-5 bg-primary bs-cover">
         <div className="container text-center">
           <span className="display-5 px-3 bg-white rounded shadow">
-            Groceries🛍️🛒
+            📺Electronics💻
           </span>
         </div>
       </div>
@@ -124,7 +125,7 @@ function Groceries() {
               <div className="col-7">
                 <span className="align-middle fw-bold">
                   {totalItems} results for{" "}
-                  <span className="text-warning">"Groceries"</span>
+                  <span className="text-warning">"Electronics"</span>
                 </span>
               </div>
               <div className="col-5 d-flex justify-content-end">
@@ -133,7 +134,7 @@ function Groceries() {
                   aria-label="Default select"
                 >
                   <option value={1}>Most Popular</option>
-                  <option value={2}>Latest items</option>
+                  <option value={2}>Latest gadgets</option>
                   <option value={3}>Trending</option>
                   <option value={4}>Price low to high</option>
                   <option value={4}>Price high to low</option>
@@ -202,4 +203,5 @@ function Groceries() {
   );
 }
 
-export default Groceries;
+
+export default Electronics;

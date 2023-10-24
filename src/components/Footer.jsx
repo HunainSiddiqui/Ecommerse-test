@@ -73,7 +73,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="col-md-3 py-3">
-              <div className="h6">Products</div>
+              <div className="h6">Hot Products</div>
               <hr />
               <ul className="list-group list-group-flush">
                 <li className="list-group-item bg-dark text-white border-light">
@@ -170,15 +170,15 @@ const Footer = () => {
               <address>
                 <strong>Twitter, Inc.</strong>
                 <br />
-                1355 Market St, Suite 900
+                Location Declared Later 💀
                 <br />
-                San Francisco, CA 94103
+                UnKnown Location💀
                 <br />
-                <abbr title="Phone">P:</abbr> (123) 456-7890
+                <abbr title="Phone">Phone No : </abbr>9570301449
               </address>
               <div className="h6">Customer Care</div>
               <hr />
-              <IconTelephone /> +1800 100 1000
+              <IconTelephone /> 7249320683
               <br />
               <IconEnvelope /> info@email.com
             </div>
@@ -202,7 +202,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className="col-md-3 py-2">
-              © 2009-{new Date().getFullYear()} React-E-Commerce.com
+              © 2022-{new Date().getFullYear()} React-E-Commerce.com
             </div>
             <div className="col-md-3 py-2 bg-white">
               <img

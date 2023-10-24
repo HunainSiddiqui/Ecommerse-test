@@ -8,8 +8,12 @@ import Footer from "./components/Footer";
 import "./App.min.css";
 import Groceries from "./views/product/Groceries";
 import { CartProvider } from "./contex/Cartcontex";
+import Electronics from "./views/product/Electronics";
+import Furniture from "./views/product/Furniture";
+import Garden from "./views/product/Garden";
+import Jewellery from "./views/product/Jewellery";
 //const Header = lazy(() => import("./components/Header"));
-//const TopMenu = lazy(() => import("./components/TopMenu"));
+// const TopMenu = lazy(() => import("./components/TopMenu"));
 const HomeView = lazy(() => import("./views/Home"));
 const SignInView = lazy(() => import("./views/account/SignIn"));
 const SignUpView = lazy(() => import("./views/account/SignUp"));
@@ -64,6 +68,10 @@ function App() {
             <Route exact path="/category" element={<ProductListView/>} />
             <Route exact path="/product/detail/:id" element={<ProductDetailView/>} />
             <Route exact path="/groceries" element={<Groceries/>} />
+            <Route exact path="/electronics" element={<Electronics/>} />
+            <Route exact path="/furniture" element={<Furniture/>} />
+            <Route exact path="/garden" element={<Garden/>} />
+            <Route exact path="/jewellery" element={<Jewellery/>} />
             <Route exact path="/star/zone" element={<StarZoneView/>} />
             <Route exact path="/cart" element={<CartView/>} />
             <Route exact path="/checkout" element={<CheckoutView />} />

@@ -32,7 +32,7 @@ const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 function ProductDetailView() {
  
   const [productdata,setproductdata] = useState(null) ;
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
    function decreaseHandler() {
      setCount(count === 1 ? (count = 1) : count - 1);
    }

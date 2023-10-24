@@ -77,30 +77,30 @@ const TopMenu = () => {
               
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/category">
+              <Link className="nav-link" to="/electronics">
                 Electronics
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/category">
+              <Link className="nav-link" to="/furniture">
                 Furniture
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/category">
+              <Link className="nav-link" to="/garden">
                 Garden & Outdoors
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/category">
+              <Link className="nav-link" to="/jewellery">
                 Jewellery
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/documentation">
                 Documentation
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

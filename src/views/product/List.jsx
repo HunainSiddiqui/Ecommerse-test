@@ -110,7 +110,7 @@ function ProductListView() {
       <div className="p-5 bg-primary bs-cover">
         <div className="container text-center">
           <span className="display-5 px-3 bg-white rounded shadow">
-            T-Shirts
+            👕T-Shirts👕
           </span>
         </div>
       </div>
