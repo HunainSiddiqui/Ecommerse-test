@@ -8,10 +8,19 @@ import { ReactComponent as IconTruck } from 'bootstrap-icons/icons/truck.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CouponApplyForm from '../../components/others/CouponApplyForm';
+import { useCart } from '../../contex/Cartcontex';
 
 function CartView() {
   const [cartItems, setCartItems] = useState([]);
   const [couponApplied, setCouponApplied] = useState(false);
+  const { state, dispatch } = useCart();
+  const [ totalprice, settotalprice ] = useState(0);
+
+  
+  const removeItem = (item) => {
+    console.log(item);
+    dispatch({ type: 'REMOVE_FROM_CART', payload: item });
+  };
 
   const onSubmitApplyCouponCode = (values) => {
     alert(JSON.stringify(values));
@@ -21,6 +30,13 @@ function CartView() {
   };
 
   useEffect(() => {
+   
+  let p = 0;
+  state.items.map((pro)=>{
+    p += pro.price
+  })
+  settotalprice(p);
+ 
     // Fetch cart items from an API or other data source and update cartItems state
     // Example: fetchCartItems().then((items) => setCartItems(items));
   }, []);
@@ -49,125 +65,57 @@ function CartView() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="row">
-                            <div className="col-3 d-none d-md-block">
-                              <img
-                                src="../../images/products/tshirt_red_480x400.webp"
-                                width="80"
-                                alt="..."
-                              />
-                            </div>
-                            <div className="col">
-                              <Link
-                                to="/product/detail"
-                                className="text-decoration-none"
-                              >
-                                Another name of some product goes just here
-                              </Link>
-                              <p className="small text-muted">
-                                Size: XL, Color: blue, Brand: XYZ
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="input-group input-group-sm mw-140">
-                            <button
-                              className="btn btn-primary text-white"
-                              type="button"
-                            >
-                              <FontAwesomeIcon icon={faMinus} />
-                            </button>
-                            <input
-                              type="text"
-                              className="form-control"
-                              defaultValue="1"
-                            />
-                            <button
-                              className="btn btn-primary text-white"
-                              type="button"
-                            >
-                              <FontAwesomeIcon icon={faPlus} />
-                            </button>
-                          </div>
-                        </td>
-                        <td>
-                          <var className="price">$237.00</var>
-                          <small className="d-block text-muted">
-                            $79.00 each
-                          </small>
-                        </td>
-                        <td className="text-end">
-                          <button className="btn btn-sm btn-outline-secondary me-2">
-                            <IconHeartFill className="i-va" />
-                          </button>
-                          <button className="btn btn-sm btn-outline-danger">
-                            <IconTrash className="i-va" />
-                          </button>
-                        </td>
-                                        </tr>
-                                        <tr>
-                        <td>
-                          <div className="row">
-                            <div className="col-3 d-none d-md-block">
-                              <img
-                                src="../../images/products/tshirt_grey_480x400.webp"
-                                width="80"
-                                alt="..."
-                              />
-                            </div>
-                            <div className="col">
-                              <Link
-                                to="/product/detail"
-                                className="text-decoration-none"
-                              >
-                                Another name of some product goes just here
-                              </Link>
-                              <p className="small text-muted">
-                                Size: XL, Color: blue, Brand: XYZ
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="input-group input-group-sm mw-140">
-                            <button
-                              className="btn btn-primary text-white"
-                              type="button"
-                            >
-                              <FontAwesomeIcon icon={faMinus} />
-                            </button>
-                            <input
-                              type="text"
-                              className="form-control"
-                              defaultValue="1"
-                            />
-                            <button
-                              className="btn btn-primary text-white"
-                              type="button"
-                            >
-                              <FontAwesomeIcon icon={faPlus} />
-                            </button>
-                          </div>
-                        </td>
-                        <td>
-                          <var className="price">$237.00</var>
-                          <small className="d-block text-muted">
-                            $79.00 each
-                          </small>
-                        </td>
-                        <td className="text-end">
-                          <button className="btn btn-sm btn-outline-secondary me-2">
-                            <IconHeartFill className="i-va" />
-                          </button>
-                          <button className="btn btn-sm btn-outline-danger">
-                            <IconTrash className="i-va" />
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
+        {state.items.map((product) => (
+          <tr key={product._id}>
+            <td>
+              <div className="row">
+                <div className="col-3 d-none d-md-block">
+                  <img
+                    src={product.images[0].url}
+                    width="80"
+                    alt={product.name}
+                  />
+                </div>
+                <div className="col">
+                  <Link to="/product/detail" className="text-decoration-none">
+                    {product.name}
+                  </Link>
+                  <p className="small text-muted">
+                    {/* Size: {product.size}, Color: {product.color}, Brand: {product.brand} */}
+                    Size: "L", Color: "Red", Brand: "HTG"
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className="input-group input-group-sm mw-140">
+                <button className="btn btn-primary text-white" type="button">
+                  <FontAwesomeIcon icon={faMinus} />
+                </button>
+                <input type="text" className="form-control" defaultValue="1" />
+                <button className="btn btn-primary text-white" type="button">
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              </div>
+            </td>
+            <td>
+              <var className="price">${product.price.toFixed(2)}</var>
+              <small className="d-block text-muted">
+                $79.00 each
+              </small>
+            </td>
+            <td className="text-end">
+              <button className="btn btn-sm btn-outline-secondary me-2">
+                <IconHeartFill className="i-va" />
+              </button>
+              <button className="btn btn-sm btn-outline-danger"
+              onClick={() => removeItem(product)}>
+                <IconTrash className="i-va" />
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
                   </table>
               </div>
               <div className="card-footer">
@@ -195,19 +143,19 @@ function CartView() {
               <div className="card-body">
                 <dl className="row border-bottom">
                   <dt className="col-6">Total price:</dt>
-                  <dd className="col-6 text-end">$1,568</dd>
+                  <dd className="col-6 text-end">$ {totalprice}</dd>
 
                   <dt className="col-6 text-success">Discount:</dt>
-                  <dd className="col-6 text-success text-end">-$58</dd>
+                  <dd className="col-6 text-success text-end">-$10</dd>
                   <dt className="col-6 text-success">
                     Coupon: <span className="small text-muted">EXAMPLECODE</span>
                   </dt>
-                  <dd className="col-6 text-success text-end">-$68</dd>
+                  <dd className="col-6 text-success text-end">-$5</dd>
                 </dl>
                 <dl className="row">
                   <dt className="col-6">Total:</dt>
                   <dd className="col-6 text-end h5">
-                    <strong>$1,350</strong>
+                    <strong>${totalprice-15}</strong>
                   </dd>
                 </dl>
                 <hr />
