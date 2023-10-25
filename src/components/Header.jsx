@@ -12,6 +12,7 @@ import { ReactComponent as IconInfoCircleFill } from "bootstrap-icons/icons/info
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const Header = () => {
  const handlelogout = (async() => {
@@ -37,10 +38,7 @@ const Header = () => {
           <div className="row g-3">
             <div className="col-md-3 text-center">
               <Link to="/">
-                <img
-                  alt="logo"
-                  src="../../images/logo.webp"
-                />
+                <img alt="logo" src="../../images/logo.webp" />
               </Link>
             </div>
             <div className="col-md-5">
@@ -105,14 +103,29 @@ const Header = () => {
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/">
-                      <IconDoorClosedFill className="text-danger" onClick={handlelogout} /> Logout
+                      <IconDoorClosedFill
+                        className="text-danger"
+                        onClick={handlelogout}
+                      />{" "}
+                      Logout
                     </Link>
                   </li>
                 </ul>
               </div>
-             
-              <Link to="/account/signin">Sign In</Link> |{" "}
-              <Link to="/account/signup"> Sign Up</Link>
+              <Link
+                className="bg-[#f07810] text-black px-2 py-2 rounded-sm text-lg"
+                to="/account/signin"
+              >
+                <Button>
+                  <strong>Sign In</strong>
+                </Button>
+              </Link>{" "}
+              |{" "}
+              <Link to="/account/signup">
+                <Button>
+                  <strong> Create an account</strong>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

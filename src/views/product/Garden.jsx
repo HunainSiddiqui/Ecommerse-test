@@ -127,7 +127,7 @@ function Garden() {
               <div className="col-7">
                 <span className="align-middle fw-bold">
                   {totalItems} results for{" "}
-                  <span className="text-warning">"Groceries"</span>
+                  <span className="text-warning">"Gardening Tools"</span>
                 </span>
               </div>
               <div className="col-5 d-flex justify-content-end">

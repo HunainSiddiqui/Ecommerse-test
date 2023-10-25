@@ -78,13 +78,13 @@ class CheckoutView extends Component {
                     <div className="col-md-4">
                       <select className="form-select" required>
                         <option value>-- Country --</option>
-                        <option>United States</option>
+                        <option>India</option>
                       </select>
                     </div>
                     <div className="col-md-4">
                       <select className="form-select" required>
                         <option value>-- State --</option>
-                        <option>California</option>
+                        <option>State is managed later</option>
                       </select>
                     </div>
                     <div className="col-md-4">
