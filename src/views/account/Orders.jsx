@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useOrder } from '../../contex/Orderconntex';
 import {
   faCheckCircle,
   faExclamationTriangle,
@@ -8,14 +9,47 @@ import {
   faTimesCircle,
   faFileInvoice,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-class OrdersView extends Component {
-  constructor(props) {
-    super();
-    this.state = {};
+function OrdersView(props) {
+  
+  const { state: orderState, dispatch: orderDispatch } = useOrder();
+  console.log(orderState);
+  const handle = async() => {
+    try {
+      const res = await axios.get(
+        "https://ecommersebackend1.onrender.com/api/v1/orders/me",
+        {
+          withCredentials: true,
+          crossDomain: true,
+        }
+      );
+      orderDispatch({ type: 'ADD_ORDER', payload: res.data.orders });
+
+      
+    } catch (error) {
+      console.log(error);
+    }
+
   }
-  render() {
-    return (
+
+  useEffect(() => {
+    handle() ;
+
+    
+
+
+
+
+
+
+
+    
+    // Fetch orders data and set it in the state using setOrders
+    
+  }, []);
+
+  return (
       <div className="container mb-3">
         <h4 className="my-3">Orders</h4>
         <div className="row g-3">
@@ -274,7 +308,7 @@ class OrdersView extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default OrdersView;

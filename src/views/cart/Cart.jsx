@@ -13,8 +13,8 @@ import { useCart } from '../../contex/Cartcontex';
 function CartView() {
   const [cartItems, setCartItems] = useState([]);
   const [couponApplied, setCouponApplied] = useState(false);
-  const { state, dispatch } = useCart();
-  const [ totalprice, settotalprice ] = useState(0);
+  const { state, dispatch,totalprice, settotalprice } = useCart();
+  
 
   
   const removeItem = (item) => {
@@ -30,16 +30,14 @@ function CartView() {
   };
 
   useEffect(() => {
-   
-  let p = 0;
-  state.items.map((pro)=>{
-    p += pro.price
-  })
-  settotalprice(p);
- 
-    // Fetch cart items from an API or other data source and update cartItems state
-    // Example: fetchCartItems().then((items) => setCartItems(items));
-  }, []);
+    let p = 0;
+    state.items.forEach((pro) => {
+      p += pro.price;
+    });
+    
+    // Dispatch an action to update the total price
+    settotalprice({ type: 'SET_TOTAL_PRICE', payload: p });
+  }, [state.items, settotalprice]);
 
   return (
     <React.Fragment>

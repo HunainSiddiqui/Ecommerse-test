@@ -25,13 +25,23 @@ const cartReducer = (state, action) => {
       return state;
   }
 };
+const totalpriceReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_TOTAL_PRICE':
+      return action.payload; // Set the total price to the payload value
+    default:
+      return state;
+  }
+};
 
 // CartContext provider component
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [totalprice, settotalprice] = useReducer(totalpriceReducer, 0); 
+
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch ,totalprice,settotalprice}}>
       {children}
     </CartContext.Provider>
   );

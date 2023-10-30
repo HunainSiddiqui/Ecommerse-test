@@ -6,6 +6,7 @@ import TopMenu from "./components/TopMenu";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.min.css";
+import { OrderProvider } from './contex/Orderconntex';
 import Groceries from "./views/product/Groceries";
 import { CartProvider } from "./contex/Cartcontex";
 import Electronics from "./views/product/Electronics";
@@ -40,6 +41,7 @@ function App() {
   return (
     <BrowserRouter>
       <React.Fragment>
+        <OrderProvider>
         <CartProvider>
         <Header />
         <TopMenu />
@@ -87,6 +89,7 @@ function App() {
         </Suspense>
         <Footer />
         </CartProvider>
+        </OrderProvider>
       </React.Fragment>
     </BrowserRouter>
   );
