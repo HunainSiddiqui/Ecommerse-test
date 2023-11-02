@@ -94,7 +94,7 @@ function ProductListView() {
       .then((response) => {
         const products = response.data.products;
         setCurrentProducts(products);
-        settotalItems(products.length());
+        settotalItems(response.data.fiterproductcount);
       })
       .catch((error) => {
         console.log(error);
