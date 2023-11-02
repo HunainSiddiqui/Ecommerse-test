@@ -13,15 +13,15 @@ const CouponApplyForm = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
       noValidate
-      >
+    >
       <Field
         name="coupon"
         type="text"
         label="Have coupon?"
         component={renderFormField}
-        placeholder="Coupon code"
+        placeholder="Extra10"
         validate={[required]}
-              required={true}
+        required={true}
       />
       <button
         type="submit"
@@ -29,6 +29,9 @@ const CouponApplyForm = (props) => {
         disabled={submitting}
       >
         Apply
+        {/* <span className="display-5 px-3 bg-white rounded shadow">
+          <b>Extra10 Applied Successfully</b>
+        </span> */}
       </button>
     </form>
   );

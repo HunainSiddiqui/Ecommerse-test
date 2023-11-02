@@ -1,4 +1,5 @@
-import React from "react";
+import { useCart } from "../contex/Cartcontex";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import { ReactComponent as IconCart3 } from "bootstrap-icons/icons/cart3.svg";
@@ -14,7 +15,15 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Button } from "@mui/material";
 
+
+// function CartButton() {
+//   const [cartCount, setCartCount] = useState(0);
+// }  
+
+
 const Header = () => {
+  const { state, dispatch, totalprice, settotalprice } = useCart();
+  console.log(state.items.length);
  const handlelogout = (async() => {
 
 
@@ -25,12 +34,7 @@ const Header = () => {
     
   }
  
-  
-
-
  })
-
-
   return (
     <React.Fragment>
       <header className="p-3 border-bottom bg-light">
@@ -48,9 +52,13 @@ const Header = () => {
               <div className="position-relative d-inline me-3">
                 <Link to="/cart" className="btn btn-primary">
                   <IconCart3 className="i-va" />
+                  {/* {cartCount > 0 && ( */}
                   <div className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle">
-                    2
+                    {state.items.length}
+                    
+                         
                   </div>
+                  {/* )} */}
                 </Link>
               </div>
               <div className="btn-group">

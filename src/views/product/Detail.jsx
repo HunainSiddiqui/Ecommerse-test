@@ -1,3 +1,4 @@
+import Header from "../../components/Header";
 import React, { useState, lazy, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useCart } from '../../contex/Cartcontex';
@@ -29,21 +30,25 @@ const ShippingReturns = lazy(() =>
 );
 const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 
+
 function ProductDetailView() {
  
   const [productdata,setproductdata] = useState(null) ;
   const [count, setCount] = useState(1);
+  const [cartCount, setCartCount] = useState(0);
    function decreaseHandler() {
      setCount(count === 1 ? (count = 1) : count - 1);
    }
    function increaseHandler() {
      setCount(count + 1);
    }
+
   const { id } = useParams();
   const { state, dispatch } = useCart();
 
   const addToCart = () => {
     dispatch({ type: 'ADD_TO_CART', payload: productdata });
+    setCartCount(cartCount + 1);
     console.log("Item added to cart");
   };
 

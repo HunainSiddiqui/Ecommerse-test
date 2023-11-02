@@ -41,7 +41,7 @@ function ProductListView() {
   const handleCategoryChange = (category) => {
     console.log(selectedCategory);
    
-    if(category == "all")
+    if(category === "all")
     {
       setSelectedCategory("");
     }
@@ -94,7 +94,7 @@ function ProductListView() {
       .then((response) => {
         const products = response.data.products;
         setCurrentProducts(products);
-        settotalItems(products.length());
+        settotalItems(products.length);
       })
       .catch((error) => {
         console.log(error);
