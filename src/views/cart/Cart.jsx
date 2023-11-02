@@ -12,7 +12,7 @@ import { useCart } from '../../contex/Cartcontex';
 
 function CartView() {
   const [cartItems, setCartItems] = useState([]);
-  const [couponApplied, setCouponApplied] = useState(false);
+  const [couponApplied, setCouponApplied] = useState(false  );
   const { state, dispatch,totalprice, settotalprice } = useCart();
   
 
@@ -23,6 +23,7 @@ function CartView() {
   };
 
   const onSubmitApplyCouponCode = (values) => {
+    // setCouponApplied = "Extra10"
     alert(JSON.stringify(values));
     // You can handle the coupon code submission here
     // Update state, make API requests, etc.
@@ -146,7 +147,7 @@ function CartView() {
                   <dt className="col-6 text-success">Discount:</dt>
                   <dd className="col-6 text-success text-end">-$10</dd>
                   <dt className="col-6 text-success">
-                    Coupon: <span className="small text-muted">EXAMPLECODE</span>
+                    Coupon: <span className="small text-muted">EXTRA10</span>
                   </dt>
                   <dd className="col-6 text-success text-end">-$5</dd>
                 </dl>

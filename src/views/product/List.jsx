@@ -41,7 +41,7 @@ function ProductListView() {
   const handleCategoryChange = (category) => {
     console.log(selectedCategory);
    
-    if(category == "all")
+    if(category === "all")
     {
       setSelectedCategory("");
     }
