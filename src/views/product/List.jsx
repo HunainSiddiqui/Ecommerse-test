@@ -14,11 +14,14 @@ import FilterClear from "../../components/filter/Clear";
 import CardServices from "../../components/card/CardServices";
 import CardProductGrid from "../../components/card/CardProductGrid";
 import CardProductList from "../../components/card/CardProductList";
+import { useSearch } from '../../contex/SearchContex';
 import axios from "axios";
 import { data } from "../../data";
 
 function ProductListView() {
   const [currentProducts, setCurrentProducts] = useState([]);
+  const { searchState, setSearchText } = useSearch();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, settotalItems] = useState(0);
   const [minvalue, setminvalue] = useState(0);
@@ -37,7 +40,16 @@ function ProductListView() {
 
   const handleCategoryChange = (category) => {
     console.log(selectedCategory);
-    setSelectedCategory(category);
+   
+    if(category == "all")
+    {
+      setSelectedCategory("");
+    }
+    else
+    {
+
+      setSelectedCategory(category);
+    }
   };
   const [priceValue, setPriceValue] = useState([0, 1000]);
   const [rating, setrating] = useState(5);
@@ -50,14 +62,16 @@ function ProductListView() {
   };
 
   useEffect(() => {
-    const searchedText = localStorage.getItem("searched");
+    const searchedText = searchState.searchText
+
+    ;
+    
     let link ;
     if (selectedCategory === "") {
      
       if (searchedText) {
         link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
-        console.log("Searched text:", searchedText);
-        localStorage.removeItem("searched");
+
       } else {
         link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
 
@@ -67,7 +81,7 @@ function ProductListView() {
     else{
       if (searchedText) {
         link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
-        console.log("Searched text:", searchedText);
+ 
       } else {
         link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`; 
       }
@@ -80,12 +94,12 @@ function ProductListView() {
       .then((response) => {
         const products = response.data.products;
         setCurrentProducts(products);
-        settotalItems(response.data.productCount);
+        settotalItems(products.length());
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [currentPage, selectedCategory, priceValue, rating]);
+  }, [currentPage, selectedCategory, priceValue, rating,searchState]);
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);

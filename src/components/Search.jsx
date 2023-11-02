@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as IconSearch } from "bootstrap-icons/icons/search.svg";
+import { useSearch } from '../contex/SearchContex';
 
 const Search = () => {
   const [inputText, setInputText] = useState("");
+  const { searchState, setSearchText } = useSearch();
 
   const handleSearch = () => {
     // Check if there's text to save
+
     if (inputText) {
       // Save the search text in local storage
-      localStorage.setItem("searched", inputText);
+      setSearchText(inputText);
+     
+    }
+    else
+    {
+      setSearchText("") ;
     }
   };
 
@@ -28,7 +36,7 @@ const Search = () => {
           type="text"
           className="form-control"
           placeholder="Search"
-          required
+   
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
@@ -40,7 +48,7 @@ const Search = () => {
           onClick={handleSearch}
         >
           <Link to="/category">
-            <IconSearch />
+             <IconSearch style={{ fill: 'white' }}/>
           </Link>
         </button>
       </div>

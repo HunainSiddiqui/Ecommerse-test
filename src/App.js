@@ -12,6 +12,7 @@ import { CartProvider } from "./contex/Cartcontex";
 import Electronics from "./views/product/Electronics";
 import Furniture from "./views/product/Furniture";
 import Garden from "./views/product/Garden";
+import { SearchProvider } from './contex/SearchContex';
 import Jewellery from "./views/product/Jewellery";
 //const Header = lazy(() => import("./components/Header"));
 // const TopMenu = lazy(() => import("./components/TopMenu"));
@@ -41,6 +42,7 @@ function App() {
   return (
     <BrowserRouter>
       <React.Fragment>
+      <SearchProvider>
         <OrderProvider>
         <CartProvider>
         <Header />
@@ -90,6 +92,7 @@ function App() {
         <Footer />
         </CartProvider>
         </OrderProvider>
+        </SearchProvider>
       </React.Fragment>
     </BrowserRouter>
   );
