@@ -29,9 +29,7 @@ const CouponApplyForm = (props) => {
         disabled={submitting}
       >
         Apply
-        {/* <span className="display-5 px-3 bg-white rounded shadow">
-          <b>Extra10 Applied Successfully</b>
-        </span> */}
+      
       </button>
     </form>
   );

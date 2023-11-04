@@ -12,14 +12,15 @@ const CartContext = createContext();
 // Reducer to manage cart actions
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case "ADD_TO_CART":
       return { ...state, items: [...state.items, action.payload] };
-    case 'REMOVE_FROM_CART':
+   
+    case "REMOVE_FROM_CART":
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.payload._id),
+        items: state.items.filter((item) => item._id !== action.payload._id),
       };
-    case 'CLEAR_CART':
+    case "CLEAR_CART":
       return { ...state, items: [] };
     default:
       return state;

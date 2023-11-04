@@ -50,72 +50,89 @@ function CartView() {
           <div className="col-md-9">
             <div className="card">
               <div className="table-responsive">
-              <table className="table table-borderless">
-                    <thead className="text-muted">
-                      <tr className="small text-uppercase">
-                        <th scope="col">Product</th>
-                        <th scope="col" width={120}>
-                          Quantity
-                        </th>
-                        <th scope="col" width={150}>
-                          Price
-                        </th>
-                        <th scope="col" className="text-end" width={130}></th>
+                <table className="table table-borderless">
+                  <thead className="text-muted">
+                    <tr className="small text-uppercase">
+                      <th scope="col">Product</th>
+                      <th scope="col" width={120}>
+                        Quantity
+                      </th>
+                      <th scope="col" width={150}>
+                        Price
+                      </th>
+                      <th scope="col" className="text-end" width={130}></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {state.items.map((product) => (
+                      <tr key={product._id}>
+                        <td>
+                          <div className="row">
+                            <div className="col-3 d-none d-md-block">
+                              <img
+                                src={product.images[0].url}
+                                width="80"
+                                alt={product.name}
+                              />
+                            </div>
+                            <div className="col">
+                              <Link
+                                to="/product/detail"
+                                className="text-decoration-none"
+                              >
+                                {product.name}
+                              </Link>
+                              <p className="small text-muted">
+                                {/* Size: {product.size}, Color: {product.color}, Brand: {product.brand} */}
+                                Size: "L", Color: "Red", Brand: "HTG"
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="input-group input-group-sm mw-140">
+                            <button
+                              className="btn btn-primary text-white"
+                              type="button"
+                            >
+                              <FontAwesomeIcon icon={faMinus} />
+                            </button>
+                            <input
+                              type="text"
+                              className="form-control"
+                              defaultValue="1"
+                            />
+                            <button
+                              className="btn btn-primary text-white"
+                              type="button"
+                            >
+                              <FontAwesomeIcon icon={faPlus} />
+                            </button>
+                          </div>
+                        </td>
+                        <td>
+                          <var className="price">
+                            ${product.price.toFixed(2)}
+                          </var>
+                          <small className="d-block text-muted">
+                            $79.00 each
+                          </small>
+                        </td>
+                        <td className="text-end">
+                          <button className="btn btn-sm btn-outline-secondary me-2">
+                            <IconHeartFill className="i-va" />
+                          </button>
+                          <button
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => removeItem(product)}
+                          >
+                            <IconTrash className="i-va" />
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-        {state.items.map((product) => (
-          <tr key={product._id}>
-            <td>
-              <div className="row">
-                <div className="col-3 d-none d-md-block">
-                  <img
-                    src={product.images[0].url}
-                    width="80"
-                    alt={product.name}
-                  />
-                </div>
-                <div className="col">
-                  <Link to="/product/detail" className="text-decoration-none">
-                    {product.name}
-                  </Link>
-                  <p className="small text-muted">
-                    {/* Size: {product.size}, Color: {product.color}, Brand: {product.brand} */}
-                    Size: "L", Color: "Red", Brand: "HTG"
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className="input-group input-group-sm mw-140">
-                <button className="btn btn-primary text-white" type="button">
-                  <FontAwesomeIcon icon={faMinus} />
-                </button>
-                <input type="text" className="form-control" defaultValue="1" />
-                <button className="btn btn-primary text-white" type="button">
-                  <FontAwesomeIcon icon={faPlus} />
-                </button>
-              </div>
-            </td>
-            <td>
-              <var className="price">${product.price.toFixed(2)}</var>
-              <small className="d-block text-muted">
-                $79.00 each
-              </small>
-            </td>
-            <td className="text-end">
-              <button className="btn btn-sm btn-outline-secondary me-2">
-                <IconHeartFill className="i-va" />
-              </button>
-              <button className="btn btn-sm btn-outline-danger"
-              onClick={() => removeItem(product)}>
-                <IconTrash className="i-va" />
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-                  </table>
+                    ))}
+                  </tbody>
+                </table>
               </div>
               <div className="card-footer">
                 <Link to="/checkout" className="btn btn-primary float-end">
@@ -128,7 +145,8 @@ function CartView() {
             </div>
             <div className="alert alert-success mt-3">
               <p className="m-0">
-                <IconTruck className="i-va me-2" /> Free Delivery within 1-2 weeks
+                <IconTruck className="i-va me-2" /> Free Delivery within 1-2
+                weeks
               </p>
             </div>
           </div>
@@ -137,6 +155,9 @@ function CartView() {
               <div className="card-body">
                 <CouponApplyForm onSubmit={onSubmitApplyCouponCode} />
               </div>
+              <dt className="col-10 text-success">
+                &nbsp;&nbsp; &nbsp;Extra10 applied successfully✅{" "}
+              </dt>
             </div>
             <div className="card">
               <div className="card-body">
@@ -154,7 +175,7 @@ function CartView() {
                 <dl className="row">
                   <dt className="col-6">Total:</dt>
                   <dd className="col-6 text-end h5">
-                    <strong>${totalprice-15}</strong>
+                    <strong>${totalprice - 15}</strong>
                   </dd>
                 </dl>
                 <hr />
@@ -173,9 +194,7 @@ function CartView() {
       <div className="bg-light border-top p-4">
         <div className="container">
           <h6>Payment and refund policy</h6>
-          <p>
-            {/* ... Payment and refund policy content */}
-          </p>
+          <p>{/* ... Payment and refund policy content */}</p>
         </div>
       </div>
     </React.Fragment>

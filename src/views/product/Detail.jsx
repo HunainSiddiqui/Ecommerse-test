@@ -13,6 +13,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { data } from "../../data";
+import { useNavigate } from "react-router-dom";
 const CardFeaturedProduct = lazy(() =>
   import("../../components/card/CardFeaturedProduct")
 );
@@ -51,6 +52,13 @@ function ProductDetailView() {
     setCartCount(cartCount + 1);
     console.log("Item added to cart");
   };
+
+  const navigate = useNavigate();
+   const buyNow = ()=>{
+    dispatch({ type: "ADD_TO_CART", payload: productdata });
+    navigate("/checkout")
+   }
+   
 
   const fetchData =(async() => {
     try {
@@ -235,6 +243,8 @@ function ProductDetailView() {
                   type="button"
                   className="btn btn-sm btn-warning me-4"
                   title="Buy now"
+                  onClick={buyNow}
+                  
                 >
                   <FontAwesomeIcon icon={faShoppingCart} /> Buy now
                 </button>
