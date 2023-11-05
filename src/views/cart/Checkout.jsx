@@ -1,5 +1,5 @@
 import React, { Component, useState ,useEffect} from "react";
-
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
 import { ReactComponent as IconTruck } from "bootstrap-icons/icons/truck.svg";
 import { ReactComponent as IconReceipt } from "bootstrap-icons/icons/receipt.svg";
@@ -13,7 +13,7 @@ import { useCart } from '../../contex/Cartcontex';
 
 function CheckoutView() { 
   const { state, dispatch,totalprice, settotalprice } = useCart();
-
+  const navigate = useNavigate();
 
   const orderItems = state.items.map((pro) => {
     // Assuming 'pro' is an item in state.items
@@ -63,8 +63,8 @@ function CheckoutView() {
             );
             
             
-       
-            alert("order placed") ;
+            navigate('/account/orders');
+           
             
           } catch (error) {
             console.log(values);
