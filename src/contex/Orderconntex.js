@@ -17,7 +17,7 @@ const orderReducer = (state, action) => {
       // Add the order to the state
       return {
         ...state,
-        orders: [...state.orders, action.payload],
+        orders: [ action.payload],
       };
     case 'REMOVE_ORDER':
       // Remove an order from the state

@@ -10,11 +10,16 @@ import {
   faFileInvoice,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import OrderCard from "./OrderCard";
 
 function OrdersView(props) {
   
   const { state: orderState, dispatch: orderDispatch } = useOrder();
-  console.log(orderState);
+ 
+  const [order,setorder] = useState([]) ;
+  
+  
+
   const handle = async() => {
     try {
       const res = await axios.get(
@@ -24,6 +29,8 @@ function OrdersView(props) {
           crossDomain: true,
         }
       );
+       
+      setorder(res.data.orders);
       orderDispatch({ type: 'ADD_ORDER', payload: res.data.orders });
 
       
@@ -33,21 +40,35 @@ function OrdersView(props) {
 
   }
 
+
   useEffect(() => {
     handle() ;
-
     
-
-
     
-    // Fetch orders data and set it in the state using setOrders
     
-  }, []);
+  },[]);
 
   return (
     <div className="container mb-3">
       <h4 className="my-3">Orders</h4>
       <div className="row g-3">
+  {order.map((order, index) => (
+    <div className="col-md-6" key={index}>
+      <OrderCard order={order} />
+    </div>
+  ))}
+</div>
+    </div>
+
+
+
+
+
+
+    // <div className="container mb-3">
+    //   <h4 className="my-3">Orders</h4>
+
+      /* <div className="row g-3">
         <div className="col-md-6">
           <div className="card">
             <div className="row g-0">
@@ -297,8 +318,8 @@ function OrdersView(props) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */
+    // </div>
   );
   
 }
