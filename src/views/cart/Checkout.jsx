@@ -526,7 +526,7 @@ function CheckoutView() {
                     <h6 className="my-0">{product.name}</h6>
                     <small className="text-muted">{product.description}</small>
                   </div>
-                  <span className="text-muted">{`$${product.price}`}</span>
+                  <span className="text-muted">{`$${product.price} (x${product.quantity})`}</span>
                 </li>
               ))}
               <li className="list-group-item d-flex justify-content-between bg-light">

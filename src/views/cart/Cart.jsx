@@ -13,9 +13,21 @@ import { useCart } from '../../contex/Cartcontex';
 function CartView() {
   const [cartItems, setCartItems] = useState([]);
   const [couponApplied, setCouponApplied] = useState(false  );
-  const { state, dispatch,totalprice, settotalprice } = useCart();
-  
+  const { state, dispatch, totalprice, settotalprice } = useCart();
 
+  const handleQuantityChange = (product, newQuantity) => {
+    if (newQuantity >= 0) {
+      // Dispatch an action to update the quantity in the context
+      dispatch({
+        type: 'UPDATE_QUANTITY',
+        payload: { productId: product._id, newQuantity },
+      });
+
+     
+    }
+  };
+
+  
   
   const removeItem = (item) => {
     console.log(item);
@@ -33,7 +45,7 @@ function CartView() {
   useEffect(() => {
     let p = 0;
     state.items.forEach((pro) => {
-      p += pro.price;
+      p += pro.price * pro.quantity;
     });
     
     // Dispatch an action to update the total price
@@ -94,17 +106,27 @@ function CartView() {
                             <button
                               className="btn btn-primary text-white"
                               type="button"
+                              onClick={() => {
+                                if (product.quantity > 1) {
+                                  handleQuantityChange(product, product.quantity - 1);
+                                }
+                              }}
                             >
                               <FontAwesomeIcon icon={faMinus} />
                             </button>
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="1"
+                              value = {product.quantity}
+                              defaultValue = {product.quantity}
                             />
+                            
                             <button
                               className="btn btn-primary text-white"
                               type="button"
+                              onClick={() => {
+                                handleQuantityChange(product, product.quantity + 1);
+                              }}
                             >
                               <FontAwesomeIcon icon={faPlus} />
                             </button>
@@ -112,10 +134,10 @@ function CartView() {
                         </td>
                         <td>
                           <var className="price">
-                            ${product.price.toFixed(2)}
+                            ${product.price.toFixed(2)  * product.quantity}
                           </var>
                           <small className="d-block text-muted">
-                            $79.00 each
+                          ${product.price.toFixed(2)} each
                           </small>
                         </td>
                         <td className="text-end">

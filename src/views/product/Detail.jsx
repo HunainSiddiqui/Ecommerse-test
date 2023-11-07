@@ -48,9 +48,15 @@ function ProductDetailView() {
   const { state, dispatch } = useCart();
 
   const addToCart = () => {
+    productdata.quantity = count ;
+    productdata.totalprice = 0 ;
     dispatch({ type: 'ADD_TO_CART', payload: productdata });
     setCartCount(cartCount + 1);
-    console.log("Item added to cart");
+   
+    
+    
+
+   
   };
 
   const navigate = useNavigate();
