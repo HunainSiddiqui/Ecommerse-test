@@ -96,7 +96,8 @@ function ProductDetailView() {
                   alt="."
                 />
                 <img
-                src="../../images/products/tshirt_grey_480x400.webp"
+                src={productdata.images && productdata.images[1] ? productdata.images[1].url : "not"}
+
                 className="border border-secondary me-2"
                 width="75"
                 alt="..."

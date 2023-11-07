@@ -47,12 +47,12 @@ function ProductListView() {
     }
     else
     {
-
+      
       setSelectedCategory(category);
     }
   };
   const [priceValue, setPriceValue] = useState([0, 1000]);
-  const [rating, setrating] = useState(5);
+  const [rating, setrating] = useState(1);
 
   const handlePriceValueChange = (newValue) => {
     setPriceValue(newValue);
