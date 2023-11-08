@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useCart } from '../../contex/Cartcontex';
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartPlus,
@@ -54,6 +56,17 @@ function ProductDetailView() {
     productdata.totalprice = 0 ;
     dispatch({ type: 'ADD_TO_CART', payload: productdata });
     setCartCount(cartCount + 1);
+    toast.info('Item added to Cart!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+    
    
     
     
@@ -236,6 +249,18 @@ function ProductDetailView() {
                   <button className="btn btn-sm btn-dark p-2 me-2"></button>
                 </dd>
               </dl>
+              <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
 
               <div className="mb-3">
                 <span className="fw-bold h5 me-2"> $ {productdata.price} </span>
@@ -287,13 +312,7 @@ function ProductDetailView() {
                 >
                   <FontAwesomeIcon icon={faShoppingCart} /> Buy now
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-secondary"
-                  title="Add to wishlist"
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                </button>
+              
               </div>
               <div>
                 <p className="fw-bold mb-2 small">Product Highlights</p>

@@ -1,5 +1,6 @@
 import React, { lazy, Component } from "react";
 import axios from "axios";
+import { Link, useNavigate  } from "react-router-dom";
 const ProfileForm = lazy(() => import("../../components/account/ProfileForm"));
 const ChangePasswordForm = lazy(() =>
   import("../../components/account/ChangePasswordForm")
@@ -11,13 +12,14 @@ const CardListForm = lazy(() =>
 
 class MyProfileView extends Component {
   state = { imagePreview: "", isDeleting: false };
-  
+
 
   onSubmitProfile = async (values) => {
     alert(JSON.stringify(values));
   };
 
   onSubmitChangePassword = async (values) => {
+    const navigate = useNavigate();
     axios.put("https://ecommersebackend1.onrender.com/api/v1/password/update", {
       oldPassword:values.currentPassword,
       newPassword: values.password,
@@ -33,6 +35,7 @@ class MyProfileView extends Component {
       })
       .catch((error) => {
         console.log(error);
+        navigate("/500") ;
       });
    
   };

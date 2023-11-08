@@ -1,5 +1,5 @@
 import React, { Component,useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useOrder } from '../../contex/Orderconntex';
 import {
@@ -11,8 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import OrderCard from "./OrderCard";
+import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 
 function OrdersView(props) {
+  const navigate = useNavigate();
   
   const { state: orderState, dispatch: orderDispatch } = useOrder();
  
@@ -32,9 +35,22 @@ function OrdersView(props) {
        
       setorder(res.data.orders);
       orderDispatch({ type: 'ADD_ORDER', payload: res.data.orders });
+      
 
       
     } catch (error) {
+      toast.error(`Please Try Again , An Error Occured`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+      navigate("/500") ;
       console.log(error);
     }
 
@@ -58,6 +74,18 @@ function OrdersView(props) {
     </div>
   ))}
 </div>
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
 
 
