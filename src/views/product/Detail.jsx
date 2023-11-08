@@ -35,8 +35,10 @@ const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 function ProductDetailView() {
  
   const [productdata,setproductdata] = useState(null) ;
+  const [featuredproduct,setfeaturedproduct] = useState([]) ;
   const [count, setCount] = useState(1);
   const [cartCount, setCartCount] = useState(0);
+  const [mainimg,setmainimg] = useState("")
    function decreaseHandler() {
      setCount(count === 1 ? (count = 1) : count - 1);
    }
@@ -71,8 +73,38 @@ function ProductDetailView() {
       
       
       const response = await axios.get(`https://ecommersebackend1.onrender.com/api/v1/product/${id}`);
+      if(response.status == 200)
+      {
+      
+        try{
+          const res = await axios.get(`https://ecommersebackend1.onrender.com/api/v1/products?category=${response.data.product.category}`);
+           
+            setfeaturedproduct(res.data.products)
+           
+          } catch (error) {
+            console.error(error);
+          }
+      
+       
+      }
       
       setproductdata(response.data.product)
+      setmainimg(response.data.product.images[0].url)
+
+      
+    } catch (error) {
+      console.error(error);
+    }
+
+  })
+  
+
+  const featureproduct = (async() =>{
+    try{
+    const response = await axios.get(`https://ecommersebackend1.onrender.com/api/v1/products?category=${productdata.category}`);
+      console.log(response.data.product);
+      setfeaturedproduct(response.data.product)
+     
     } catch (error) {
       console.error(error);
     }
@@ -80,9 +112,11 @@ function ProductDetailView() {
   })
   useEffect(()=>{
     fetchData() ;
+    
 
     
   },[id])
+
   return (
     <div className="container-fluid mt-3">
       <div className="row">
@@ -91,29 +125,27 @@ function ProductDetailView() {
             {productdata ? (<>
                 <div className="col-md-5 text-center">
                 <img
-                  src={productdata.images[0].url}
+                  src={mainimg}
                   className="img-fluid mb-3"
                   alt="."
+                 
                 />
                 <img
                 src={productdata.images && productdata.images[1] ? productdata.images[1].url : "not"}
+                onClick={() => {setmainimg(productdata.images && productdata.images[1] ? productdata.images[1].url : "not")}}
 
                 className="border border-secondary me-2"
                 width="75"
                 alt="..."
               />
               <img
-                src="../../images/products/tshirt_black_480x400.webp"
+                src={productdata.images && productdata.images[0] ? productdata.images[0].url : "not"}
                 className="border border-secondary me-2"
                 width="75"
                 alt="..."
+                onClick={() => {setmainimg(productdata.images && productdata.images[0] ? productdata.images[0].url : "not")}}
               />
-              <img
-                src="../../images/products/tshirt_green_480x400.webp"
-                className="border border-secondary me-2"
-                width="75"
-                alt="..."
-              />
+             
             </div>
             <div className="col-md-7">
               <h1 className="h5 d-inline me-2">{productdata.name}</h1>
@@ -396,7 +428,7 @@ function ProductDetailView() {
           </div>
         </div>
         <div className="col-md-4">
-          <CardFeaturedProduct data={data.products} />
+          <CardFeaturedProduct data={featuredproduct} />
           <CardServices />
         </div>
       </div>

@@ -19,12 +19,23 @@ import { Button } from "@mui/material";
 
 const Header = () => {
   const { state, dispatch, totalprice, settotalprice } = useCart();
-  console.log(state.items.length);
+
+  
  const handlelogout = (async() => {
+  console.log("fdvd");
 
 
   try {
     const res  = await axios.get("https://ecommersebackend1.onrender.com/api/v1/logout") ;
+    if(res.status === 200)
+    {
+      localStorage.clear();
+      dispatch({ type: 'CLEAR_CART'});
+
+    }
+   
+
+
   } catch (error) {
     console.log(error);
     
@@ -50,7 +61,7 @@ const Header = () => {
                   <IconCart3 className="i-va" />
                   
                   <div className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle">
-                    {state.items.length} 
+                  {state.items ? state.items.length : 0}
                   </div>
                 </Link>
               </div>
@@ -102,13 +113,15 @@ const Header = () => {
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li>
+                  <li
+                   onClick={handlelogout}>
                     <Link className="dropdown-item" to="/">
                       <IconDoorClosedFill
                         className="text-danger"
-                        onClick={handlelogout}
+                       
                       />{" "}
                       Logout
+
                     </Link>
                   </li>
                 </ul>

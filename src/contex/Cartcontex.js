@@ -1,9 +1,19 @@
 // CartContext.js
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 // Initial state for the cart
+
+const getcartdata = () => {
+  let newdata = localStorage.getItem("Cart");
+
+  if (!newdata || newdata === "[]") {
+    return [];
+  }
+
+  return JSON.parse(newdata);
+}
 const initialState = {
-  items: [],
+  items: getcartdata(),
 };
 
 // Create the context
@@ -56,10 +66,18 @@ const totalpriceReducer = (state, action) => {
   }
 };
 
+
+
 // CartContext provider component
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [totalprice, settotalprice] = useReducer(totalpriceReducer, 0);
+
+
+  useEffect(()=>{
+    localStorage.setItem("Cart",JSON.stringify(state.items))
+  
+  },[state.items]) 
 
   return (
     <CartContext.Provider
