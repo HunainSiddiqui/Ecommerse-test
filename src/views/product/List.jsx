@@ -28,6 +28,7 @@ function ProductListView() {
   const [maxvalue, setmaxvalue] = useState(0);
   const [view, setView] = useState("list");
   const categories = [
+    "All Categories",
     "Clothing",
     "ball",
     "Pen",
@@ -41,9 +42,10 @@ function ProductListView() {
   const handleCategoryChange = (category) => {
     console.log(selectedCategory);
    
-    if(category === "all")
+    if(category === "All Categories")
     {
-      setSelectedCategory("");
+      
+      setSelectedCategory("all");
     }
     else
     {
@@ -60,32 +62,52 @@ function ProductListView() {
   const handeleRatingchange = (newValue) => {
     setrating(newValue);
   };
-
+  const [lastsearch,setlastsearch] = useState("") ;
   useEffect(() => {
     const searchedText = searchState.searchText
 
     ;
+   
     
-    let link ;
-    if (selectedCategory === "") {
-     
-      if (searchedText) {
-        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+  
+   
+    let link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
 
-      } else {
-        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`;
-
-        
-      }
-    }
-    else{
-      if (searchedText) {
-        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&keyword=${searchedText}`;
+if (searchedText && selectedCategory) {
  
-      } else {
-        link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&category=${selectedCategory}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}`; 
-      }
-    }
+    if(lastsearch === searchedText)
+    {
+      if (selectedCategory !== "all") {
+      
+      link = `https://ecommersebackend1.onrender.com/api/v1/products?page=${currentPage}&price[gte]=${priceValue[0]}&price[lte]=${priceValue[1]}&ratings[gte]=${rating}&category=${selectedCategory}`;
+      }}
+  else{
+    
+    link += `&keyword=${searchedText}`;
+    setlastsearch(searchedText);
+
+
+   }
+}
+else if (searchedText) {
+  link += `&keyword=${searchedText}`;
+  setlastsearch(searchedText);
+ 
+
+  
+}
+
+else if (selectedCategory) {
+  if (selectedCategory !== "all") {
+    link += `&category=${selectedCategory}`;
+  }
+   
+}
+
+// If both search and category are selected, clear the category and apply the search.
+
+    
+  
     axios
       .get(link, {
         withCredentials: true,
@@ -139,8 +161,8 @@ function ProductListView() {
             <div className="row">
               <div className="col-7">
                 <span className="align-middle fw-bold">
-                  {totalItems} results for{" "}
-                  <span className="text-warning">"t-shirts"</span>
+                  {totalItems} results for  
+                  <span className="text-warning"> { searchState.searchText}</span>
                 </span>
               </div>
               <div className="col-5 d-flex justify-content-end">

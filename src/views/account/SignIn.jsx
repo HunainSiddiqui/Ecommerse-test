@@ -2,6 +2,8 @@ import React, { lazy } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 
 
 const SignInForm = lazy(() => import("../../components/account/SignInForm"));
@@ -28,9 +30,31 @@ function SignInView() {
     
       if (res.status === 200) {
         navigate("/");
+        toast.success('Welcome', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
 
       }
     } catch (error) {
+      toast.error(`Please Try Again , An Error Occured`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+      navigate("/500") ;
       console.log(error);
     }
     
@@ -59,6 +83,18 @@ function SignInView() {
           <SignInForm onSubmit={onSubmit} />
         </div>
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   );
 }

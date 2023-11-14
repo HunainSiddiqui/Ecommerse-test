@@ -9,6 +9,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useCart } from '../../contex/Cartcontex';
+import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 
 
 function CheckoutView() { 
@@ -61,7 +63,16 @@ function CheckoutView() {
                 crossDomain: true,
               }
             );
-            
+            toast.success('🦄 Order Placed Successfully!', {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
             
             navigate('/account/orders');
            
@@ -360,6 +371,18 @@ function CheckoutView() {
                           className="text-danger"
                         />
                       </div>
+                      <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
                     </div>
                     <div className="col-md-4">
                       <div className="form-group">

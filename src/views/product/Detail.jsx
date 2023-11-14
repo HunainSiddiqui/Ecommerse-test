@@ -1,9 +1,11 @@
 import Header from "../../components/Header";
 import React, { useState, lazy, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import { useCart } from '../../contex/Cartcontex';
+import { useParams } from "react-router-dom";
+import { useCart } from "../../contex/Cartcontex";
 import { ReactComponent as IconStarFill } from "bootstrap-icons/icons/star-fill.svg";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartPlus,
@@ -12,8 +14,6 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import FilterColor from "../../components/filter/Color";
- 
 import { data } from "../../data";
 import { useNavigate } from "react-router-dom";
 const CardFeaturedProduct = lazy(() =>
@@ -33,10 +33,8 @@ const ShippingReturns = lazy(() =>
 );
 const SizeChart = lazy(() => import("../../components/others/SizeChart"));
 
-
 function ProductDetailView() {
   const [productdata, setproductdata] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(""); // Add state for selected color
   const [featuredproduct, setfeaturedproduct] = useState([]);
   const [count, setCount] = useState(1);
   const [cartCount, setCartCount] = useState(0);
@@ -56,6 +54,16 @@ function ProductDetailView() {
     productdata.totalprice = 0;
     dispatch({ type: "ADD_TO_CART", payload: productdata });
     setCartCount(cartCount + 1);
+    toast.info("Item added to Cart!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   const navigate = useNavigate();
@@ -63,9 +71,6 @@ function ProductDetailView() {
     dispatch({ type: "ADD_TO_CART", payload: productdata });
     navigate("/checkout");
   };
-  //   Function to change the color of the products
-
-
 
   const fetchData = async () => {
     try {
@@ -90,9 +95,6 @@ function ProductDetailView() {
       console.error(error);
     }
   };
-    const handleColorSelection = (color) => {
-      setSelectedColor(color);
-    };
 
   const featureproduct = async () => {
     try {
@@ -231,34 +233,29 @@ function ProductDetailView() {
                         </label>
                       </div>
                     </dd>
-                    
                     <dt className="col-sm-3">Color</dt>
                     <dd className="col-sm-9">
-                      {productdata &&
-                        productdata.colors &&
-                        productdata.colors.map((color, index) => (
-                          <button
-                            key={index}
-                            className={`btn btn-sm p-2 me-2,  ${
-                              selectedColor === color
-                                ? "btn-primary"
-                                : "btn-secondary"
-                            }`}
-                            onClick={() => handleColorSelection(color)}
-                          >
-                            {color}
-                            
-                          </button>
-                        ))}
                       <button className="btn btn-sm btn-primary p-2 me-2"></button>
                       <button className="btn btn-sm btn-secondary p-2 me-2"></button>
                       <button className="btn btn-sm btn-success p-2 me-2"></button>
                       <button className="btn btn-sm btn-danger p-2 me-2"></button>
                       <button className="btn btn-sm btn-warning p-2 me-2"></button>
-                      {/* <button className="btn btn-sm btn-info p-2 me-2"></button> */}
+                      <button className="btn btn-sm btn-info p-2 me-2"></button>
                       <button className="btn btn-sm btn-dark p-2 me-2"></button>
                     </dd>
                   </dl>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                  />
 
                   <div className="mb-3">
                     <span className="fw-bold h5 me-2">
@@ -310,13 +307,6 @@ function ProductDetailView() {
                       onClick={buyNow}
                     >
                       <FontAwesomeIcon icon={faShoppingCart} /> Buy now
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary"
-                      title="Add to wishlist"
-                    >
-                      <FontAwesomeIcon icon={faHeart} />
                     </button>
                   </div>
                   <div>
