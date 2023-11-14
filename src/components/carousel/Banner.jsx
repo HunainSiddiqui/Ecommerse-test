@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Item = ({ item, index }) => (
@@ -24,6 +24,22 @@ const Indicator = ({ item, index }) => (
 );
 
 const Banner = (props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (activeIndex < props.data.length - 1) {
+        setActiveIndex(activeIndex + 1);
+      } else {
+        setActiveIndex(0);
+      }
+    }, 5000); // Change the banner every 5 seconds (adjust as needed)
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [activeIndex, props.data]);
+
   return (
     <div
       id={props.id}
@@ -46,6 +62,11 @@ const Banner = (props) => {
         href={`#${props.id}`}
         role="button"
         data-bs-slide="prev"
+        onClick={() =>
+          setActiveIndex(
+            activeIndex > 0 ? activeIndex - 1 : props.data.length - 1
+          )
+        }
       >
         <span className="carousel-control-prev-icon" aria-hidden="true" />
         <span className="sr-only">Previous</span>
@@ -55,8 +76,13 @@ const Banner = (props) => {
         href={`#${props.id}`}
         role="button"
         data-bs-slide="next"
+        onClick={() =>
+          setActiveIndex(
+            activeIndex < props.data.length - 1 ? activeIndex + 1 : 0
+          )
+        }
       >
-        <span className="carousel-control-next-icon" aria-hidden="true" />
+        <span className="carousel-control-next-icon" ariahidden="true" />
         <span className="sr-only">Next</span>
       </a>
     </div>
