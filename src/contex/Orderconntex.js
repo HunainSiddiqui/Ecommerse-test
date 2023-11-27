@@ -10,7 +10,9 @@ export const useOrder = () => {
 const initialState = {
   orders: [],
 };
-
+const myorderstate = {
+  myorder: []
+}
 const orderReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ORDER':
@@ -30,11 +32,24 @@ const orderReducer = (state, action) => {
   }
 };
 
+const myorderreduser = (state, action) => {
+  switch (action.type) {
+    case "MY_ORDER":
+      return {
+        ...state,
+        myorder: [ action.payload],
+      };
+    default:
+      return state;
+  }
+};
+
 export const OrderProvider = ({ children }) => {
   const [state, dispatch] = useReducer(orderReducer, initialState);
+  const [myorder,setmyorder] = useReducer(myorderreduser,myorderstate) ;
 
   return (
-    <OrderContext.Provider value={{ state, dispatch }}>
+    <OrderContext.Provider value={{ state, dispatch,myorder,setmyorder }}>
       {children}
     </OrderContext.Provider>
   );

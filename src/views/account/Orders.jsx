@@ -67,9 +67,9 @@ function OrdersView(props) {
   return (
     <div className="container mb-3">
       <h4 className="my-3">Orders</h4>
-      <div className="row g-3">
+      <div className="row g-1" style={{background: "black"}}>
   {order.map((order, index) => (
-    <div className="col-md-6" key={index}>
+    <div className="col-md-12" key={index}>
       <OrderCard order={order} />
     </div>
   ))}

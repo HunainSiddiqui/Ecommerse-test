@@ -23,8 +23,9 @@ function SignUpView() {
         "https://ecommersebackend1.onrender.com/api/v1/register",
         formdata
       );
+      const token = res.data.token;
       if (res.status === 201) {
-        navigate("/");
+        navigate("/account/signin");
         toast.success('Welcome', {
           position: "top-right",
           autoClose: 2000,

@@ -17,7 +17,7 @@ const CardProductList = (props) => {
       <div className="row g-0">
         <div className="col-md-3 text-center">
 
-          <img src={product.images[0].url} className="img-fluid" alt="..." />
+          <img src={product.images[0].url} style={{ height: '200px', objectFit: 'cover' }} className="img-fluid" alt="..." />
         </div>
         <div className="col-md-6">
           <div className="card-body">
@@ -28,15 +28,15 @@ const CardProductList = (props) => {
               </Link>
               
             </h6>
-            {product.isNew && (
+            {product && (
               <span className="badge bg-success me-2">New</span>
             )}
-            {product.isHot && <span className="badge bg-danger me-2">Hot</span>}
+            {product && <span className="badge bg-danger me-2">Hot</span>}
 
             <div>
-              {product.star > 0 &&
+              {product.ratings > 0 &&
                 Array.from({ length: 5 }, (_, key) => {
-                  if (key <= product.star)
+                  if (key <= product.ratings)
                     return (
                       <IconStarFill className="text-warning me-1" key={key} />
                     );
@@ -63,21 +63,21 @@ const CardProductList = (props) => {
           <div className="card-body">
           <div className="mb-2">
             <span className="fw-bold h5">${product.price}</span>
-            {product.originPrice > 0 && (
+            {product.price > 0 && (
               <del className="small text-muted ms-2">
-                ${product.originPrice}
+                ${product.price + product.price * 0.2}
               </del>
             )}
-            {(product.discountPercentage > 0 || product.discountPrice > 0) && (
+            {(product.price > 0 || product.price > 0) && (
               <span className={`rounded p-1 bg-warning ms-2 small`}>
                 -
-                {product.discountPercentage > 0
-                  ? product.discountPercentage + "%"
-                  : "$" + product.discountPrice}
+                {product.price > 0
+                  ? 20 + "%"
+                  : "$" + product.price}
               </span>
             )}
           </div>
-          {product.isFreeShipping && (
+          {product&& (
             <p className="text-success small mb-2">
               <IconTruckFill /> Free shipping
             </p>

@@ -68,6 +68,7 @@ function ProductDetailView() {
 
   const navigate = useNavigate();
   const buyNow = () => {
+     productdata.quantity = count;
     dispatch({ type: "ADD_TO_CART", payload: productdata });
     navigate("/checkout");
   };

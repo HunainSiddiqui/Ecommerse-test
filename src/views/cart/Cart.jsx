@@ -197,7 +197,7 @@ function CartView() {
                 <dl className="row">
                   <dt className="col-6">Total:</dt>
                   <dd className="col-6 text-end h5">
-                    <strong>${totalprice - 15}</strong>
+                    <strong>${totalprice<20?0:totalprice-15}</strong>
                   </dd>
                 </dl>
                 <hr />

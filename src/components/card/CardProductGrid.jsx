@@ -8,13 +8,13 @@ const CardProductGrid = (props) => {
   const product = props.data;
   return (
     <div className="card">
-      <img src={product.images[0].url} className="card-img-top" alt="..." />
-      {product.isNew && (
+      <img src={product.images[0].url} style={{ height: '300px', objectFit: 'cover' }} className="card-img-top" alt="..." />
+      {product && (
         <span className="badge bg-success position-absolute mt-2 ms-2">
           New
         </span>
       )}
-      {product.isHot && (
+      {product && (
         <span className="badge bg-danger position-absolute r-0 mt-2 me-2">
           Hot
         </span>

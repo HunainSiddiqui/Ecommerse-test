@@ -26,10 +26,12 @@ function SignInView() {
           crossDomain: true,
         }
       );
-      const token = res.data.token;
+     
+      
+        console.log(res.status);
     
       if (res.status === 200) {
-        navigate("/");
+       
         toast.success('Welcome', {
           position: "top-right",
           autoClose: 2000,
@@ -40,23 +42,29 @@ function SignInView() {
           progress: undefined,
           theme: "colored",
           });
+          navigate("/");
 
       }
     } catch (error) {
-      toast.error(`Please Try Again , An Error Occured`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
-      navigate("/500") ;
+      if (error.response.status === 401) {
+        toast.error(`Invalid Credentials`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+  
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+        }
       console.log(error);
-    }
+     
+      }
+     
+      
+    
     
   };
   return (

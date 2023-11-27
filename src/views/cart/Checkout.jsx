@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 function CheckoutView() { 
   const { state, dispatch,totalprice, settotalprice } = useCart();
   const navigate = useNavigate();
+  console.log(state.items);
 
   const orderItems = state.items.map((pro) => {
     // Assuming 'pro' is an item in state.items
@@ -48,7 +49,7 @@ function CheckoutView() {
         },
         taxAmount: 0,
         shippingAmount: totalprice,
-        totalAmount: totalprice-15,
+        totalPrice: totalprice-15,
         
         orderItems: orderItems
       
@@ -63,16 +64,20 @@ function CheckoutView() {
                 crossDomain: true,
               }
             );
-            toast.success('🦄 Order Placed Successfully!', {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
+            if (res.status === 201) {
+              toast.success('🦄 Order Placed Successfully!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+              
+            }
+            
             
             navigate('/account/orders');
            
@@ -85,7 +90,15 @@ function CheckoutView() {
             
    
   };
-  
+  useEffect(() => {
+    let p = 0;
+    state.items.forEach((pro) => {
+      p += pro.price * pro.quantity;
+    });
+    
+    // Dispatch an action to update the total price
+    settotalprice({ type: 'SET_TOTAL_PRICE', payload: p });
+  }, [state.items, settotalprice]);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -529,7 +542,7 @@ theme="colored"
                 </div>
                 <div className="card-footer border-info d-grid">
                   <button type="submit" className="btn btn-info">
-                    Pay Now <strong>$162</strong>
+                    Pay Now <strong>${totalprice-15}</strong>
                   </button>
                 </div>
               </div>
