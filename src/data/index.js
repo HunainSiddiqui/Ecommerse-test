@@ -2,19 +2,19 @@ export const data = {
   banner: [
     {
       to: "/link",
-      img: "../../images/banner/Banner_2.webp",
+      img: "../../images/banner/test.jpg",
       title: "First slide label",
       description: "Nulla vitae elit libero, a pharetra augue mollis interdum",
     },
     {
       to: "/link",
-      img: "../../images/banner/Banner_3.webp",
+      img: "../../images/banner/model2.jpg",
       title: "Second slide label",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     },
     {
       to: "/link",
-      img: "../../images/banner/Banner_1.webp",
+      img: "../../images/banner/model3.jpg",
       title: "Third slide label",
       description: " Praesent commodo cursus magna, vel scelerisque nisl.",
     },

@@ -14,6 +14,7 @@ import Furniture from "./views/product/Furniture";
 import Garden from "./views/product/Garden";
 import { SearchProvider } from './contex/SearchContex';
 import Jewellery from "./views/product/Jewellery";
+import Header2 from "./components/Newhearder";
 //const Header = lazy(() => import("./components/Header"));
 // const TopMenu = lazy(() => import("./components/TopMenu"));
 const HomeView = lazy(() => import("./views/Home"));
@@ -45,7 +46,7 @@ function App() {
       <SearchProvider>
         <OrderProvider>
         <CartProvider>
-        <Header />
+        <Header2 />
         <TopMenu />
         <Suspense
           fallback={
