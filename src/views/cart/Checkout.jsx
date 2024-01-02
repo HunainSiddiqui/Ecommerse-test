@@ -33,6 +33,7 @@ function CheckoutView() {
  
   
   const handleSubmit = async(values) => {
+    
       const formdata = {
         
         shippingInfo: {
@@ -55,6 +56,7 @@ function CheckoutView() {
       
     };
 
+    console.log(formdata);
           try {
             const res = await axios.post(
               "https://ecommersebackend1.onrender.com/api/v1/order/new",
@@ -108,11 +110,6 @@ function CheckoutView() {
     shippingCountry: Yup.string().required("Country is required"),
     shippingState: Yup.string().required("State is required"),
     shippingZip: Yup.string().required("Zip code is required"),
-    billingName: Yup.string().required("Name is required"),
-    billingAddress: Yup.string().required("Billing address is required"),
-    billingCountry: Yup.string().required("Country is required"),
-    billingState: Yup.string().required("State is required"),
-    billingZip: Yup.string().required("Zip code is required"),
     paymentMethod: Yup.string().required("Payment method is required"),
     cardName: Yup.string().required("Name on card is required"),
     cardNumber: Yup.string()

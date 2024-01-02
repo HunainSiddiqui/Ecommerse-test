@@ -264,7 +264,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className="col-md-3 py-2">
-              ©️ 2022-{new Date().getFullYear()} React-E-Commerce.com
+              ©️ 2023-{new Date().getFullYear()} 
             </div>
             <div className="col-md-3 py-2 bg-white">
               <img
