@@ -10,6 +10,7 @@ const CardImage = (props) => {
             src={props.src}
             className="img-fluid rounded"
             alt="..."
+            style={{ objectFit: "cover", width: "100%", height: "100%" }}
           />
         </div>
       </div>

@@ -21,111 +21,122 @@ const Footer = () => {
     <React.Fragment>
       <footer>
         <div className="container-fluid bg-primary">
-          <div className="row ">
-            <div className="col-md-9 py-3 text-white">
-              Get connected with us on social networks!
-            </div>
-            <div className="col-md-3 py-3 text-center text-white">
-              <Link to="/" title="Apple">
-                <FontAwesomeIcon icon={faApple} className="text-light me-3" />
-              </Link>
-              <Link to="/" title="Windows">
-                <FontAwesomeIcon icon={faWindows} className="text-light me-3" />
-              </Link>
-              <Link to="/" title="Android">
-                <FontAwesomeIcon icon={faAndroid} className="text-light me-3" />
-              </Link>
-              |
-              <Link to="/" title="Twitter">
-                <FontAwesomeIcon
-                  icon={faTwitter}
-                  className="text-light ms-3 me-3"
-                />
-              </Link>
-              <Link to="/" title="Facebook">
-                <FontAwesomeIcon
-                  icon={faFacebookF}
-                  className="text-light me-3"
-                />
-              </Link>
-              <Link to="/" title="Instagram">
-                <FontAwesomeIcon
-                  icon={faInstagram}
-                  className="text-light me-3"
-                />
-              </Link>
-              <Link to="/" title="Youtube">
-                <FontAwesomeIcon icon={faYoutube} className="text-light me-3" />
-              </Link>
-            </div>
-          </div>
+        
         </div>
         <div className="container-fluid bg-dark text-white">
           <div className="row ">
             <div className="col-md-3 py-3">
-              <div className="h6">Company Name</div>
+              <div
+                className="h6"
+                style={{
+                  "font-family": "Montagu Slab, cursive",
+                  "font-weight": "bold",
+                }}
+              >
+                Cart Canvas - Brushstrokes of fashion.
+              </div>
               <hr />
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+              <p
+                style={{
+                  "font-family": "Montagu Slab, cursive",
+                }}
+              >
+                Our collections are inspired by the creativity and freedom of
+                art. We source pieces from both established and emerging
+                designers, ensuring that you'll find something that speaks to
+                your soul. Whether you're a minimalist looking for a statement
+                piece or a maximalist who loves to mix and match, we have
+                something for you.
               </p>
             </div>
             <div className="col-md-3 py-3">
-              <div className="h6">Hot Products</div>
+              <div
+                className="h6"
+                style={{
+                  "font-family": "Montagu Slab, cursive",
+                  "font-weight": "bold",
+                }}
+              >
+                Hot Products
+              </div>
               <hr />
               <ul className="list-group list-group-flush">
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
-                    Electronics
+                    Luxury Perfumes
                   </Link>
                 </li>
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
-                    Mobiles
+                    Dresses and Tops
                   </Link>
                 </li>
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
-                    Car & bike
+                    High Top Boots
                   </Link>
                 </li>
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
-                    Super Market
+                    Premium Watches
                   </Link>
                 </li>
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
-                    Travel Cards
+                    Travel Bags and Totes
                   </Link>
                 </li>
               </ul>
             </div>
             <div className="col-md-3 py-3">
-              <div className="h6">Policy</div>
+              <div
+                className="h6"
+                style={{
+                  "font-family": "Montagu Slab, cursive",
+                  "font-weight": "bold",
+                }}
+              >
+                Policy
+              </div>
               <hr />
               <ul className="list-group list-group-flush">
                 <li className="list-group-item bg-dark text-white border-light">
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
                     Return Policy
                   </Link>
@@ -134,6 +145,9 @@ const Footer = () => {
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
                     Terms Of Use
                   </Link>
@@ -142,6 +156,9 @@ const Footer = () => {
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
                     Security
                   </Link>
@@ -150,6 +167,9 @@ const Footer = () => {
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
                     Privacy
                   </Link>
@@ -158,6 +178,9 @@ const Footer = () => {
                   <Link
                     to="/"
                     className="text-decoration-none text-white stretched-link"
+                    style={{
+                      "font-family": "Nunito, cursive",
+                    }}
                   >
                     EPR Compliance
                   </Link>
@@ -165,22 +188,61 @@ const Footer = () => {
               </ul>
             </div>
             <div className="col-md-3 py-3">
-              <div className="h6">Address</div>
+              <div
+                className="h6"
+                style={{
+                  "font-family": "Montagu Slab, cursive",
+                  "font-weight": "bold",
+                }}
+              >
+                Address
+              </div>
               <hr />
               <address>
-                <strong>Twitter, Inc.</strong>
+                <strong
+                  style={{
+                    "font-family": "Nunito, cursive",
+                  }}
+                >
+                  Made with ❤️, Cart Canvas
+                </strong>
+                <br
+                  style={{
+                    "font-family": "Nunito, cursive",
+                  }}
+                />
+                India ❤️
                 <br />
-                Location Declared Later 💀
-                <br />
-                UnKnown Location💀
-                <br />
-                <abbr title="Phone">Phone No : </abbr>9570301449
+                <abbr
+                  title="Phone"
+                  style={{
+                    "font-family": "Nunito, cursive",
+                  }}
+                >
+                  Phone No :{" "}
+                </abbr>
+                7XXXXXXXXXX
               </address>
-              <div className="h6">Customer Care</div>
+              <div
+                className="h6"
+                style={{
+                  "font-family": "Nunito, cursive",
+                }}
+              >
+                Customer Care
+              </div>
               <hr />
-              <IconTelephone /> 7249320683
+              <IconTelephone
+                style={{
+                  "font-family": "Nunito, cursive",
+                }}
+              />{" "}
+              9XXXXXXXXXX
               <br />
-              <IconEnvelope /> info@email.com
+              <IconEnvelope
+                style={{
+                      "font-family": "Nunito, cursive",
+                    }} /> cartcanvas@gmail.com
             </div>
           </div>
         </div>
@@ -202,7 +264,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className="col-md-3 py-2">
-              © 2022-{new Date().getFullYear()} React-E-Commerce.com
+              ©️ 2022-{new Date().getFullYear()} React-E-Commerce.com
             </div>
             <div className="col-md-3 py-2 bg-white">
               <img

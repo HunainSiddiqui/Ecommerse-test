@@ -86,7 +86,7 @@ function App() {
             <Route path="*" element={<NotFoundView/>} />
           </Routes>
         </Suspense>
-       
+       <Footer />
         </CartProvider>
         </OrderProvider>
         </SearchProvider>

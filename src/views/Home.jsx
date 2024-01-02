@@ -75,7 +75,14 @@ class HomeView extends Component {
             </div>
             <div className="col-md-3">
               <CardLogin className="mb-3" />
-              <CardImage src="../../images/banner/Watches.webp" to="/list" />
+              <CardImage src="../../images/banner/active.webp " to="/list" />
+              <br />
+
+              
+              <CardImage src="../../images/banner/smiley.webp" to="/list" />
+              <br />
+              <CardImage src="../../images/banner/boots.webp" to="/list" />
+              <br />
             </div>
           </div>
         </div>

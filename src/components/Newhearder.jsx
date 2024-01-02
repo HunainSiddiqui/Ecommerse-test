@@ -223,9 +223,13 @@ class PrimarySearchAppBar extends React.Component {
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap >
-              Material-UI   
-            </Typography>
+
+            <Link to="/">
+            
+              <img alt="logo" src="../../images/cart_logo1.png " 
+              style= {{width :"120px" }} />
+            </Link>
+        
          
        
 

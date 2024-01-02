@@ -17,7 +17,7 @@ import CardProductList from "../../components/card/CardProductList";
 import { useSearch } from '../../contex/SearchContex';
 import axios from "axios";
 import { data } from "../../data";
-import purpleImage from './purple.jpeg';
+import purpleImage from './fas.png';
 
 function ProductListView() {
   const [currentProducts, setCurrentProducts] = useState([]);
@@ -134,27 +134,24 @@ else if (selectedCategory) {
 
   return (
     <React.Fragment>
-     <div className="p-5 bg-3f51b5 bs-cover" style={{ position: 'relative' }}>
-  <div className="container text-center">
-    <img
-      src={purpleImage}
-      alt="Purple"
-      style={{
-        width: '100%',
-        height: '120%',
-        objectFit: 'cover',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-      }}
-    />
-    <span className="display-5 px-3 bg-white rounded shadow" style={{ position: 'relative', zIndex: 1,background:"#8597ff" }}>
-      Store
-    </span>
-  </div>
+     <div className="p-5 bg-3f51b5">
+        
+          <img
+            src={purpleImage}
+            alt="Purple"
+            style={{
+              width: '100%',
+              height: '300px',
+             
+              top: 0,
+              left: 0,
+            }}
+          />
+   
+  
 </div>
 
-      <Breadcrumb />
+    
       <div className="container-fluid mb-3">
         <div className="row">
           <div className="col-md-3">
